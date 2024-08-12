@@ -6,3 +6,4 @@ pandas
 Sastrawi
 streamlit
 streamlit_option_menu
+setuptools
