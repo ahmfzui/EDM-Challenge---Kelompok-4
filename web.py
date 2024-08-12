@@ -14,8 +14,8 @@ from indoNLP.preprocessing import *
 st.set_page_config(page_title="Bullying Detection", layout="wide")
 
 # Load models and vectorizer
-logistic_regression = joblib.load('logistic_regression_model.pkl')
-vectorizer = joblib.load('fitted_vectorizer.pkl')
+logistic_regression = joblib.load('svm_model.pkl')
+vectorizer = joblib.load('vectorizer.pkl')
 
 # Preprocessing functions
 def convert_emoji(text):
