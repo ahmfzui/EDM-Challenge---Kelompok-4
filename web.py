@@ -10,11 +10,13 @@ from indoNLP.preprocessing import replace_slang
 from Sastrawi.StopWordRemover.StopWordRemoverFactory import StopWordRemoverFactory, StopWordRemover, ArrayDictionary
 from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
 from indoNLP.preprocessing import *
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 st.set_page_config(page_title="Bullying Detection", layout="wide")
 
 # Load models and vectorizer
-logistic_regression = joblib.load('svm_model.pkl')
+svm = joblib.load('svm_model.pkl')
 vectorizer = joblib.load('vectorizer.pkl')
 
 # Preprocessing functions
@@ -44,6 +46,8 @@ def stemming(text_cleaning):
     stemmer = factory.create_stemmer()
     return ' '.join([stemmer.stem(word) for word in text_cleaning])
 
+from scipy.special import expit  # Sigmoid function
+
 def predict_hate_speech(text, model):
     # Preprocessing steps
     text = convert_emoji(text)
@@ -57,7 +61,7 @@ def predict_hate_speech(text, model):
     # Count the word distribution and filter
     word_count = len(text.split())
     if word_count == 0 or word_count > 25:
-        return None, 0.0  # Skip this text if it doesn't meet the criteria
+        return None  # Skip this text if it doesn't meet the criteria
     
     # Transform text using the vectorizer
     text_transformed = vectorizer.transform([text])
@@ -65,12 +69,10 @@ def predict_hate_speech(text, model):
     # Predicting the class
     prediction = model.predict(text_transformed)
     
-    # Predicting the confidence score
-    confidence_score = np.max(model.predict_proba(text_transformed)) if hasattr(model, 'predict_proba') else 0.0
-    
     result = 'Bullying' if prediction == 1 else 'Non-Bullying'
     
-    return result, confidence_score
+    return result
+
 
 def main():
     menu_selection = option_menu(
@@ -183,23 +185,31 @@ def main():
             """, unsafe_allow_html=True)      
 
         with tab1:
-            with st.form(key='bullying_detection_form'):
-                user_input = st.text_area("Input Text", placeholder="Masukkan teks komentar di sini...")
-                st.markdown("<br>", unsafe_allow_html=True)  # Add space above the button
-                submit_button = st.form_submit_button("Submit")  # Ensure label is not empty
-                st.markdown("<br>", unsafe_allow_html=True)  # Add space below the button
-                
-                if submit_button:
-                    # Call your prediction function
-                    result, confidence_score = predict_hate_speech(user_input, logistic_regression)
+            col1, col2, col3 = st.columns([0.2, 0.8, 0.2])  # Adjust column widths
+            with col2:  # Center column
+                st.markdown("<br>", unsafe_allow_html=True)
+                with st.form(key='bullying_detection_form'):
+                    user_input = st.text_area("Input Text", placeholder="Masukkan teks komentar di sini...", height=200)
+                    st.markdown("<br>", unsafe_allow_html=True)  # Add space above the button
+                    submit_button = st.form_submit_button("Submit")  # Ensure label is not empty
+                    st.markdown("<br>", unsafe_allow_html=True)  # Add space below the button
                     
-                    # Display the result
-                    if result == "Bullying":
-                        st.warning(f"Detected as **Bullying** with confidence score: {confidence_score:.2f}")
-                    else:
-                        st.success(f"Detected as **Non-Bullying** with confidence score: {confidence_score:.2f}")
+                    if submit_button:
+                        # Call your prediction function
+                        result = predict_hate_speech(user_input, svm)
+                        
+                        # Display the result
+                        if result == "Bullying":
+                            col1, col2, col3 = st.columns([0.2, 0.295, 0.2])
+                            with col2:
+                                st.warning(f"Teks tersebut teridentifikasi sebagai **Bullying** 🤨")
+                        else:
+                            col1, col2, col3 = st.columns([0.2, 0.3405, 0.2])
+                            with col2:
+                                st.success(f"Teks tersebut teridentifikasi sebagai **Non-Bullying** 😊")
 
         with tab2:
+            st.markdown("<br>", unsafe_allow_html=True)
             with st.form(key='upload_csv_form'):
                 uploaded_file = st.file_uploader("Unggah file CSV untuk dideteksi", type="csv")
                 st.markdown("<br>", unsafe_allow_html=True)
@@ -212,17 +222,54 @@ def main():
                         df_upload = pd.read_csv(uploaded_file, encoding='ISO-8859-1')
 
                         if 'Text' in df_upload.columns:
-                            # Menggunakan apply untuk mendapatkan prediksi dan skor kepercayaan
-                            predictions = df_upload['Text'].apply(lambda x: predict_hate_speech(x, logistic_regression))
+                            # Menggunakan apply untuk mendapatkan prediksi
+                            predictions = df_upload['Text'].apply(lambda x: predict_hate_speech(x, svm))
                             
-                            # Memisahkan hasil menjadi dua kolom
-                            df_upload['Prediction'] = [result for result, score in predictions]
-                            df_upload['Confidence Score'] = [score for result, score in predictions]
+                            # Menambahkan hasil prediksi ke dataframe
+                            df_upload['Prediction'] = [result for result in predictions]
+                            df_upload = df_upload.dropna()
 
-                            df_upload = df_upload.dropna(subset=['Prediction'])
-                            
-                            # Menampilkan dataframe hasil prediksi
-                            st.dataframe(df_upload, use_container_width=True)
+                            col1, col2= st.columns([0.5, 0.5])
+                            with col1:
+                                # Menampilkan dataframe hasil prediksi
+                                st.dataframe(df_upload, use_container_width=True, height=695)
+                            with col2:
+                                # Membuat pie chart dari hasil prediksi
+                                prediction_counts = df_upload['Prediction'].value_counts()
+                                
+                                # Menentukan warna khusus untuk Non-Bullying (hijau) dan Bullying (#E4A800)
+                                colors = ['#379C5E', '#E4A800']
+
+                                # Menambahkan efek explode pada kedua label untuk memperjelas tampilan pie chart
+                                explode = [0.03, 0.03]  # Sedikit memisahkan kedua bagian pie chart
+
+                                # Menyiapkan label dan data untuk pie chart
+                                labels = [f'Non-Bullying ({prediction_counts.get(0, 0)})', f'Bullying ({prediction_counts.get(1, 0)})']
+                                sizes = prediction_counts
+                                total = sum(sizes)
+                                
+                                def autopct_func(pct, allvalues):
+                                    absolute = int(round(pct / 100.*total))
+                                    return f'{pct:.1f}% ({absolute})'
+
+                                # Membuat pie chart dengan ukuran yang lebih kecil (4x4)
+                                plt.figure(figsize=(5,5))
+                                wedges, texts, autotexts = plt.pie(sizes, 
+                                                                autopct=lambda pct: autopct_func(pct, sizes), 
+                                                                colors=colors, 
+                                                                startangle=140, 
+                                                                explode=explode, 
+                                                                wedgeprops={'edgecolor': 'black'}, 
+                                                                textprops={'fontsize': 8})  # Kecilkan font keterangan
+
+                                # Menambahkan judul pada pie chart dengan font yang lebih kecil
+                                plt.title('Distribusi Prediksi Bullying dan Non-Bullying', fontsize=10)
+
+                                # Menambahkan legenda
+                                plt.legend(wedges, labels, loc="lower right", fontsize=7)
+                                
+                                # Menampilkan pie chart di Streamlit
+                                st.pyplot(plt, bbox_inches="tight")
                         
                         else:
                             st.error("File CSV harus memiliki kolom 'Text'.")
@@ -233,7 +280,6 @@ def main():
                         st.error("Terjadi kesalahan saat mem-parsing file CSV.")
                     except Exception as e:
                         st.error(f"Terjadi kesalahan saat memproses file: {str(e)}")
-
 
 if __name__ == "__main__":
     main()
