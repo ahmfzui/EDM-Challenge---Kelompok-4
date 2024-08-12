@@ -63,13 +63,12 @@ def predict_hate_speech(text, model):
     text_transformed = vectorizer.transform([text])
     
     # Predicting the class
-    prediction = model.predict(text_transformed)[0]  # SVM's predict returns an array
+    prediction = model.predict(text_transformed)
     
     # Predicting the confidence score
-    if hasattr(model, 'decision_function'):
-        confidence_score = np.max(model.decision_function(text_transformed))  # Confidence score using decision function
-    else:
-        confidence_score = 0.0  # Fallback if decision_function is not available
+    # SVM doesn't have predict_proba, so use decision_function instead
+    decision_score = model.decision_function(text_transformed)
+    confidence_score = np.max(decision_score) if decision_score.size > 0 else 0.0
     
     result = 'Bullying' if prediction == 1 else 'Non-Bullying'
     
