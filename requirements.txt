@@ -6,5 +6,4 @@ pandas
 Sastrawi
 streamlit
 streamlit_option_menu
-tensorflow
 distutils
