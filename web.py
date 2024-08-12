@@ -169,7 +169,7 @@ def main():
         st.markdown("<br>", unsafe_allow_html=True)
 
         # Load and display CSV data
-        df = pd.read_csv('C:/Users/ahmad/Documents/Project/EDM Challenge/Data Scrapping - EDM Challenge Kelompok 4 - Sheet1.csv')
+        df = pd.read_csv('Data Scrapping - EDM Challenge Kelompok 4 - Sheet1.csv')
         st.dataframe(df, use_container_width=True)
         
         st.markdown("---", unsafe_allow_html=True)
