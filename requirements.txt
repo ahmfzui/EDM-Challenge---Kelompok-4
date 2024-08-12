@@ -7,5 +7,4 @@ Sastrawi
 streamlit
 streamlit-option-menu
 setuptools
-distutils
 tensorflow
