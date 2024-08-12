@@ -9,5 +9,5 @@ streamlit-option-menu
 setuptools
 tensorflow
 scikit-learn
-matplotplib
+matplotplib.pyplot
 seaborn
