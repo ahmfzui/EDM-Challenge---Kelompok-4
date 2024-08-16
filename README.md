@@ -28,7 +28,7 @@
 # 🎯 **Sentinel: Deteksi Komentar Bullying di Media Sosial**
 
 <div align="center">
-  <img src="img/artificial (2000 x 800 piksel).png" alt="Sentinel" style="max-width: 800px;">
+  <img src="img/artificial (2000 x 800 piksel) (1).png" alt="Sentinel" style="max-width: 800px;">
 </div>
 
 Sentinel adalah project dari kelompok kami untuk menghasilkan sebuah model analisis sentimen yang dirancang untuk mendeteksi komentar di media sosial, khususnya untuk mengidentifikasi apakah sebuah komentar termasuk dalam kategori bullying atau non-bullying. Proyek ini menggabungkan model machine learning dengan implementasi dalam bentuk website berbasis Streamlit dan notebook, bertujuan untuk mengurangi cyberbullying di sosial media.
