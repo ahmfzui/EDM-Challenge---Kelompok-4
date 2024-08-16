@@ -34,6 +34,20 @@
 Sentinel adalah project dari kelompok kami untuk menghasilkan sebuah model analisis sentimen yang dirancang untuk mendeteksi komentar di media sosial, khususnya untuk mengidentifikasi apakah sebuah komentar termasuk dalam kategori bullying atau non-bullying. Proyek ini menggabungkan model machine learning dengan implementasi dalam bentuk website berbasis Streamlit dan notebook, bertujuan untuk mengurangi cyberbullying di sosial media.
 Model machine learning yang diusulkan akan dikembangkan untuk mengidentifikasi dan mengklasifikasikan komentar di media sosial ke dalam dua kategori: **Bullying** dan **Non-Bullying**. Dengan menggunakan dataset yang telah diberi label dari komentar TikTok, model ini akan dilatih untuk mengenali pola, bahasa, dan konteks yang membedakan antara komentar yang merugikan dan yang tidak.
 
+# 🌟 **Fitur-Fitur di Web Deployment Sentinel**
+
+[Sentinel AI](https://sentinelai.streamlit.app/) adalah antarmuka web yang memudahkan pengguna untuk memanfaatkan kemampuan deteksi komentar bullying secara langsung. Berikut adalah dua fitur utama yang tersedia di dalam aplikasi ini:
+
+### 1. Input Komentar
+Fitur ini memungkinkan pengguna untuk memasukkan satu komentar secara langsung ke dalam aplikasi. Komentar yang dimasukkan akan dianalisis oleh model machine learning untuk menentukan apakah komentar tersebut termasuk dalam kategori bullying atau non-bullying.
+
+![Input Komentar Screenshot](img/input_komentar.png)
+
+### 2. Unggah Data CSV
+Fitur ini dirancang untuk pengguna yang ingin menganalisis banyak komentar sekaligus. Pengguna dapat mengunggah file CSV yang berisi daftar komentar TikTok, dan aplikasi akan memproses seluruh file tersebut untuk mengidentifikasi komentar yang termasuk dalam kategori bullying dan non-bullying.
+
+![Unggah Data CSV Screenshot](img/upload_csv.png)
+
 ## 📚 **Problem Background**
 Dengan pesatnya perkembangan platform media sosial seperti TikTok, komentar bullying menjadi masalah utama yang mempengaruhi kesehatan mental pengguna dan pengalaman mereka di platform. Mengidentifikasi komentar bullying secara manual tidak efektif karena volume komentar yang tinggi dan keragaman bahasa serta konteks. Media sosial memungkinkan pengguna untuk meninggalkan komentar yang bisa berisi pujian hingga kritik merugikan. Bahasa ambigu dan sarkasme sering digunakan dalam komentar bullying, sehingga diperlukan sistem otomatis yang dapat mendeteksi dan mengklasifikasikan komentar bullying secara akurat.
 
