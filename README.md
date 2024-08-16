@@ -36,7 +36,7 @@ Model machine learning yang diusulkan akan dikembangkan untuk mengidentifikasi d
 
 # 🌟 **Fitur-Fitur di Web Deployment Sentinel**
 
-[Sentinel AI](https://sentinelai.streamlit.app/) adalah antarmuka web yang memudahkan pengguna untuk memanfaatkan kemampuan deteksi komentar bullying secara langsung. Berikut adalah dua fitur utama yang tersedia di dalam aplikasi ini:
+Sentinel AI (https://sentinelai.streamlit.app/) adalah antarmuka web yang memudahkan pengguna untuk memanfaatkan kemampuan deteksi komentar bullying secara langsung. Berikut adalah dua fitur utama yang tersedia di dalam aplikasi ini:
 
 ### 1. Input Komentar
 Fitur ini memungkinkan pengguna untuk memasukkan satu komentar secara langsung ke dalam aplikasi. Komentar yang dimasukkan akan dianalisis oleh model machine learning untuk menentukan apakah komentar tersebut termasuk dalam kategori bullying atau non-bullying.
