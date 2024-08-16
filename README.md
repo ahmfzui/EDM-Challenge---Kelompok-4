@@ -34,7 +34,7 @@
 Sentinel adalah project dari kelompok kami untuk menghasilkan sebuah model analisis sentimen yang dirancang untuk mendeteksi komentar di media sosial, khususnya untuk mengidentifikasi apakah sebuah komentar termasuk dalam kategori bullying atau non-bullying. Proyek ini menggabungkan model machine learning dengan implementasi dalam bentuk website berbasis Streamlit dan notebook, bertujuan untuk mengurangi cyberbullying di sosial media.
 Model machine learning yang diusulkan akan dikembangkan untuk mengidentifikasi dan mengklasifikasikan komentar di media sosial ke dalam dua kategori: **Bullying** dan **Non-Bullying**. Dengan menggunakan dataset yang telah diberi label dari komentar TikTok, model ini akan dilatih untuk mengenali pola, bahasa, dan konteks yang membedakan antara komentar yang merugikan dan yang tidak.
 
-# 🌟 **Fitur-Fitur di Web Deployment Sentinel**
+## 🌟 **Fitur-Fitur di Web Deployment Sentinel**
 
 Sentinel AI (https://sentinelai.streamlit.app/) adalah antarmuka web yang memudahkan pengguna untuk memanfaatkan kemampuan deteksi komentar bullying secara langsung. Berikut adalah dua fitur utama yang tersedia di dalam aplikasi ini:
 
