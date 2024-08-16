@@ -16,8 +16,8 @@ import seaborn as sns
 st.set_page_config(page_title="Bullying Detection", layout="wide")
 
 # Load models and vectorizer
-svm = joblib.load('./models/svm_model.pkl')
-vectorizer = joblib.load('./models/vectorizer.pkl')
+svm = joblib.load('/models/svm_model.pkl')
+vectorizer = joblib.load('/models/vectorizer.pkl')
 
 # Preprocessing functions
 def convert_emoji(text):
