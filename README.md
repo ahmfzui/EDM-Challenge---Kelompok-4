@@ -44,7 +44,7 @@ Fitur ini memungkinkan pengguna untuk memasukkan satu komentar secara langsung k
 ![Input Komentar Screenshot](img/input_komentar.png)
 
 ### 2. Unggah Data CSV
-Fitur ini dirancang untuk pengguna yang ingin menganalisis banyak komentar sekaligus. Pengguna dapat mengunggah file CSV yang berisi daftar komentar TikTok, dan aplikasi akan memproses seluruh file tersebut untuk mengidentifikasi komentar yang termasuk dalam kategori bullying dan non-bullying.
+Fitur ini dirancang untuk pengguna yang ingin menganalisis banyak komentar sekaligus. Pengguna dapat mengunggah file CSV yang berisi daftar komentar TikTok, dan aplikasi akan memproses seluruh file tersebut untuk mengidentifikasi komentar yang termasuk dalam kategori bullying dan non-bullying dan juga melihat visualisasi pie chart distribusi dari kedua kelas tersebut.
 
 ![Unggah Data CSV Screenshot](img/upload_csv.png)
 
