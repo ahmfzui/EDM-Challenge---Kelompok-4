@@ -16,8 +16,8 @@ import seaborn as sns
 st.set_page_config(page_title="Bullying Detection", layout="wide")
 
 # Load models and vectorizer
-svm = joblib.load('svm_model.pkl')
-vectorizer = joblib.load('vectorizer.pkl')
+svm = joblib.load('./models/svm_model.pkl')
+vectorizer = joblib.load('./models/vectorizer.pkl')
 
 # Preprocessing functions
 def convert_emoji(text):
@@ -150,7 +150,7 @@ def main():
         # Load and display the image
         col1, col2, col3 = st.columns([0.2, 0.7, 0.2])
         with col2:
-            image = Image.open('artificial (2000 x 800 piksel) (1).png')
+            image = Image.open('./img/artificial (2000 x 800 piksel) (1).png')
             st.image(image, use_column_width=True)
         
         st.write("""
